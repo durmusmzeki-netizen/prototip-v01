@@ -3,78 +3,416 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Osmanlı Tarihi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11100d">
+<title>Osmanlı Tarihi | Dijital Arşiv</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 <style>
-*{box-sizing:border-box;scroll-behavior:smooth}
-body{margin:0;background:#101010;color:#f4e5bd;font-family:Georgia,serif}
-header{text-align:center;padding:25px 10px;background:#080808;border-bottom:2px solid #c9a44c}
-header h1{color:#e7c66d;margin:0}
-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;padding:15px;background:#211b10}
-nav a{color:#f1d58b;text-decoration:none;font-weight:bold}
-.hero{text-align:center;padding:75px 15px;background:linear-gradient(135deg,#38270d,#090909,#251b0b)}
-.hero h2{font-size:40px;color:#f0cf78}
-.hero p{line-height:1.8;font-size:18px}
-section{max-width:900px;margin:auto;padding:30px 18px}
-h2.section-title{color:#e7c66d;border-bottom:1px solid #8d7136;padding-bottom:12px}
-.card{background:#1c1c1c;border:1px solid #65512b;border-radius:10px;padding:18px;margin:15px 0;line-height:1.8}
-.card h3{color:#e7c66d;margin-top:0}
-.timeline{border-left:3px solid #c9a44c;padding-left:20px}
-footer{text-align:center;padding:25px;background:#080808;color:#b9a879;border-top:1px solid #9d7b30}
-@media(max-width:600px){.hero h2{font-size:30px}nav{gap:12px}}
+:root {
+  --bg:#10100e;
+  --panel:#1b1a16;
+  --gold:#d9b765;
+  --text:#f4ecd9;
+  --muted:#b7ad98;
+  --line:#49402d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;line-height:1.6
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+header{
+  padding:26px 18px;text-align:center;
+  background:linear-gradient(130deg,#211a0c,#090909,#30230d);
+  border-bottom:1px solid var(--gold)
+}
+.logo{font-size:12px;letter-spacing:5px;color:var(--gold)}
+header h1{font-family:Georgia,serif;color:var(--gold);font-size:clamp(27px,5vw,43px);margin:8px 0}
+header p{color:var(--muted);margin:0}
+nav{
+  position:sticky;top:0;z-index:1000;display:flex;gap:8px;
+  justify-content:center;flex-wrap:wrap;padding:12px;
+  background:#15140ff2;border-bottom:1px solid var(--line)
+}
+nav a{
+  padding:8px 12px;text-decoration:none;border-radius:7px;
+  color:var(--text);font-size:14px
+}
+nav a:hover{background:#352b18;color:var(--gold)}
+main{max-width:1100px;margin:auto;padding:20px}
+.hero{
+  text-align:center;padding:45px 20px;margin:10px 0 25px;
+  border:1px solid var(--line);border-radius:15px;
+  background:radial-gradient(ellipse at top,#44331a,#1b1812 50%,#11100e)
+}
+.hero .symbol{font-size:45px;color:var(--gold)}
+.hero h2{font: bold clamp(28px,5vw,45px) Georgia,serif;color:var(--gold);line-height:1.2}
+.hero p{max-width:650px;margin:15px auto;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px}
+.stat{background:#171610;padding:14px;border:1px solid var(--line);border-radius:10px}
+.stat strong{display:block;color:var(--gold);font-size:22px}
+.stat span{font-size:12px;color:var(--muted)}
+.section{padding:28px 0;scroll-margin-top:85px}
+.section-head{margin-bottom:18px}
+.section-head h2{color:var(--gold);font: bold 27px Georgia,serif;margin:0}
+.section-head p{color:var(--muted);margin:4px 0}
+.searchbox{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+input[type="search"]{
+  flex:1;min-width:180px;background:#1c1b17;color:white;
+  border:1px solid var(--line);padding:13px;border-radius:8px
+}
+.btn{
+  border:1px solid #8b713b;background:#322713;color:#f5dfaa;
+  padding:10px 15px;border-radius:8px
+}
+.btn:hover{background:#493719}
+.btn.secondary{background:#24231e;border-color:var(--line);color:var(--text)}
+.btn:disabled{opacity:.5;cursor:default}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{
+  min-width:0;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:17px
+}
+.card h3{color:var(--gold);margin:5px 0 8px;font-size:18px}
+.card p{margin:6px 0;color:#d1c8b6}
+.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.card-actions .btn{font-size:13px;padding:7px 10px}
+.art{
+  height:130px;display:grid;place-items:center;border-radius:8px;
+  background:radial-gradient(circle at center,#59421e,#211a0d 65%,#14130f);
+  border:1px solid #66502b;font-size:54px;margin-bottom:13px
+}
+.timeline{border-left:2px solid var(--gold);margin:10px 0 0 9px;padding-left:22px}
+.event{position:relative;padding:0 0 23px}
+.event:before{
+  content:"";position:absolute;left:-29px;top:7px;width:10px;height:10px;
+  background:var(--gold);border:2px solid var(--bg);border-radius:50%
+}
+.event time{font-weight:bold;color:var(--gold)}
+.event h3{margin:2px 0;color:var(--text)}
+.event p{margin:3px 0;color:var(--muted)}
+#map{height:380px;background:#24231e;border:1px solid var(--line);border-radius:12px;z-index:1}
+.map-note{font-size:13px;color:var(--muted)}
+.quizbox{max-width:720px}
+#question{font-size:20px;color:var(--gold);font-weight:bold;margin:10px 0 18px}
+.answers{display:grid;gap:10px}
+.answer{width:100%;text-align:left;background:#25231d;color:var(--text);border:1px solid var(--line);padding:13px;border-radius:8px}
+.answer:hover:not(:disabled){border-color:var(--gold)}
+.answer.correct{border-color:#60b57a;background:#1b3022}
+.answer.wrong{border-color:#d87868;background:#351d1a}
+#feedback{min-height:28px;margin:12px 0;color:var(--gold)}
+footer{text-align:center;border-top:1px solid var(--line);padding:25px;color:var(--muted);font-size:13px}
+.empty{color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:8px}
+.hidden{display:none!important}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#201d16;color:#f4ecd9}
+.leaflet-popup-content a{color:#d9b765}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:14px}}
+@media(max-width:480px){
+ .grid{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr 1fr}
+ nav{gap:3px}
+ nav a{font-size:12px;padding:8px}
+ .hero{padding:30px 14px}
+}
 </style>
 </head>
+
 <body>
 <header>
-<h1>☾ OSMANLI TARİHİ ☽</h1>
-<p>Bir Cihan Devletinin Hikâyesi</p>
+  <div class="logo">TARİH • KÜLTÜR • MİRAS</div>
+  <h1>☾ Osmanlı Tarihi ☽</h1>
+  <p>Bir cihan devletinin hikâyesini keşfet.</p>
 </header>
+
 <nav>
-<a href="#anasayfa">Ana Sayfa</a>
-<a href="#kurulus">Kuruluş</a>
-<a href="#padisahlar">Padişahlar</a>
-<a href="#fetihler">Fetihler</a>
-<a href="#zaman">Zaman Çizelgesi</a>
+  <a href="#anasayfa">Ana Sayfa</a>
+  <a href="#kesfet">Keşfet</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#zaman">Zaman Çizelgesi</a>
+  <a href="#harita">Harita</a>
+  <a href="#quiz">Bilgi Yarışması</a>
+  <a href="#favoriler">Favoriler</a>
 </nav>
-<div class="hero" id="anasayfa">
-<h2>Bir Cihan<br>Devletinin Hikâyesi</h2>
-<p>Söğüt'te başlayan bir yolculuk...<br>Üç kıtaya uzanan büyük bir tarih.</p>
-</div>
-<section id="kurulus">
-<h2 class="section-title">Osmanlı Devleti'nin Kuruluşu</h2>
-<div class="card">
-<h3>Osman Bey</h3>
-Osmanlı Beyliği'nin kurucusu kabul edilir. 13. yüzyılın sonlarında beyliğin güçlenmesinde önemli rol oynadı.
-</div>
-<div class="card">
-<h3>Orhan Bey</h3>
-1326 yılında Bursa fethedildi. Devlet teşkilatı gelişti ve Rumeli'ye geçiş için önemli adımlar atıldı.
-</div>
+
+<main>
+<section class="hero" id="anasayfa">
+  <div class="symbol">⚜</div>
+  <h2>Geçmişin izinde<br>bir yolculuk</h2>
+  <p>Osmanlı padişahlarını, fetihleri, tarihî mekânları ve önemli olayları tek bir yerde keşfet. Bilgini test et ve kendi tarih arşivini oluştur.</p>
+  <a class="btn" href="#kesfet" style="display:inline-block;text-decoration:none">Keşfetmeye başla →</a>
+  <div class="stats">
+    <div class="stat"><strong>1299–1922</strong><span>Geleneksel tarih aralığı</span></div>
+    <div class="stat"><strong>6 asır</strong><span>Uzun bir tarih yolculuğu</span></div>
+    <div class="stat"><strong id="favCount">0</strong><span>Favorilerin</span></div>
+  </div>
 </section>
-<section id="padisahlar">
-<h2 class="section-title">Padişahlar ve Hayatları</h2>
-<div class="card"><h3>Osman Bey</h3>Osmanlı Beyliği'nin kurucusudur.</div>
-<div class="card"><h3>Orhan Bey</h3>Bursa'nın fethi ve devlet teşkilatının gelişmesiyle tanınır.</div>
-<div class="card"><h3>Fatih Sultan Mehmet</h3>1453 yılında İstanbul'u fethetti. Bu fetih, dünya tarihinde önemli bir dönüm noktası oldu.</div>
-<div class="card"><h3>Kanuni Sultan Süleyman</h3>Osmanlı Devleti'nin siyasi, askerî ve kültürel açıdan güçlü olduğu dönemde hüküm sürdü.</div>
+
+<section class="section" id="kesfet">
+  <div class="section-head">
+    <h2>⌕ Tarih Arşivi</h2>
+    <p>Padişahları ve olayları kelimeyle ara.</p>
+  </div>
+  <div class="searchbox">
+    <input id="search" type="search" placeholder="Örn. Fatih, İstanbul, Mohaç..." aria-label="Tarih arşivinde ara">
+    <button class="btn" id="clearSearch">Temizle</button>
+  </div>
+  <div class="grid" id="searchResults"></div>
 </section>
-<section id="fetihler">
-<h2 class="section-title">Savaşlar ve Fetihler</h2>
-<div class="card"><h3>Bursa'nın Fethi — 1326</h3>Orhan Bey döneminde gerçekleşti.</div>
-<div class="card"><h3>İstanbul'un Fethi — 1453</h3>Fatih Sultan Mehmet'in komutasında gerçekleşti.</div>
-<div class="card"><h3>Çaldıran Savaşı — 1514</h3>Yavuz Sultan Selim döneminde Osmanlı zaferiyle sonuçlandı.</div>
-<div class="card"><h3>Mohaç Meydan Muharebesi — 1526</h3>Kanuni Sultan Süleyman döneminde Osmanlı zaferi kazanıldı.</div>
+
+<section class="section" id="galeri">
+  <div class="section-head">
+    <h2>✧ Tarih Galerisi</h2>
+    <p>Önemli kişiler ve tarihî mekânlar için görsel kartlar.</p>
+  </div>
+  <div class="grid" id="gallery"></div>
+  <p class="map-note">Galeri kartlarındaki simgeler dekoratiftir; gerçek tarihî fotoğraf değildir.</p>
 </section>
-<section id="zaman">
-<h2 class="section-title">Zaman Çizelgesi</h2>
-<div class="timeline">
-<p><strong>1299 civarı:</strong> Osmanlı Beyliği'nin kuruluş dönemi.</p>
-<p><strong>1326:</strong> Bursa'nın fethi.</p>
-<p><strong>1453:</strong> İstanbul'un fethi.</p>
-<p><strong>1514:</strong> Çaldıran Savaşı.</p>
-<p><strong>1526:</strong> Mohaç Meydan Muharebesi.</p>
-</div>
+
+<section class="section" id="zaman">
+  <div class="section-head">
+    <h2>⌛ Zaman Çizelgesi</h2>
+    <p>Önemli olayları kronolojik sırayla incele.</p>
+  </div>
+  <div class="timeline" id="timeline"></div>
 </section>
-<footer>Osmanlı Tarihi | Eğitim amaçlı hazırlanmıştır.</footer>
+
+<section class="section" id="harita">
+  <div class="section-head">
+    <h2>🗺 Tarihî Mekânlar Haritası</h2>
+    <p>Haritadaki işaretlere dokunarak yerler hakkında bilgi al.</p>
+  </div>
+  <div id="map"></div>
+  <p class="map-note">Bu harita tarihî mekânların günümüzdeki yaklaşık konumlarını gösterir; Osmanlı sınırlarını göstermez. Haritanın yüklenmesi için internet gerekir.</p>
+</section>
+
+<section class="section" id="quiz">
+  <div class="section-head">
+    <h2>♜ Bilgi Yarışması</h2>
+    <p>Her doğru cevap 10 puan kazandırır. Bakalım kaç doğru yapacaksın!</p>
+  </div>
+  <div class="card quizbox">
+    <div class="eyebrow" id="quizProgress">Başlamaya hazır mısın?</div>
+    <div id="question">Osmanlı tarihi bilgini test etmeye hazır ol!</div>
+    <div class="answers" id="answers"></div>
+    <div id="feedback" aria-live="polite"></div>
+    <div class="card-actions">
+      <button class="btn" id="startQuiz">Yarışmayı başlat</button>
+      <button class="btn secondary hidden" id="nextQuestion">Sonraki soru →</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="favoriler">
+  <div class="section-head">
+    <h2>★ Favorilerim</h2>
+    <p>Kaydettiğin tarih konularına buradan ulaşabilirsin.</p>
+  </div>
+  <div class="grid" id="favorites"></div>
+</section>
+</main>
+
+<footer>
+  <div>☾ OSMANLI TARİHİ DİJİTAL ARŞİV ☽</div>
+  <p>Eğitim ve kültürel bilgilendirme amacıyla hazırlanmıştır.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const topics = [
+ {id:"osman",title:"Osman Bey",category:"Padişahlar",year:"1299 civarı",icon:"👑",desc:"Osmanlı Beyliği'nin kurucusu kabul edilir. Beylik, onun ve ardından gelen yöneticilerin döneminde büyüdü."},
+ {id:"orhan",title:"Orhan Bey",category:"Padişahlar",year:"1324–1362",icon:"🏰",desc:"Bursa'nın fethi ve devlet teşkilatının gelişmesiyle tanınır. Osmanlı'nın Rumeli'ye geçişi bu dönemde başladı."},
+ {id:"fatih",title:"Fatih Sultan Mehmet",category:"Padişahlar",year:"1432–1481",icon:"👑",desc:"1453 yılında İstanbul'u fethetti. Bilim, sanat ve devlet yönetimi alanlarında da önemli izler bıraktı."},
+ {id:"selim",title:"Yavuz Sultan Selim",category:"Padişahlar",year:"1512–1520",icon:"⚔️",desc:"Doğu ve güney yönündeki seferlerle Osmanlı topraklarını genişletti. Çaldıran Savaşı onun döneminde gerçekleşti."},
+ {id:"kanuni",title:"Kanuni Sultan Süleyman",category:"Padişahlar",year:"1520–1566",icon:"📜",desc:"Uzun hükümdarlığı boyunca Osmanlı siyaseti, hukuku, mimarisi ve kültürü gelişti."},
+ {id:"bursa",title:"Bursa'nın Fethi",category:"Fetihler",year:"1326",icon:"🏙️",desc:"Orhan Bey döneminde gerçekleşen fetih, Bursa'yı Osmanlı'nın önemli merkezlerinden biri hâline getirdi."},
+ {id:"istanbul",title:"İstanbul'un Fethi",category:"Fetihler",year:"1453",icon:"🏰",desc:"Fatih Sultan Mehmet'in ordusu 29 Mayıs 1453'te İstanbul'u fethetti. Bizans İmparatorluğu sona erdi."},
+ {id:"caldiran",title:"Çaldıran Savaşı",category:"Savaşlar",year:"1514",icon:"⚔️",desc:"Yavuz Sultan Selim ile Safevi hükümdarı Şah İsmail arasında gerçekleşti. Osmanlı zafer kazandı."},
+ {id:"mohac",title:"Mohaç Meydan Muharebesi",category:"Savaşlar",year:"1526",icon:"🛡️",desc:"Kanuni Sultan Süleyman döneminde Osmanlı ordusu Macar ordusunu yendi."},
+ {id:"sogut",title:"Söğüt",category:"Mekânlar",year:"13. yüzyıl",icon:"🌳",desc:"Osmanlı Beyliği'nin erken tarihiyle özdeşleşen, günümüzde Bilecik ilinde bulunan yerleşim."},
+ {id:"topkapi",title:"Topkapı Sarayı",category:"Mekânlar",year:"15. yüzyıl",icon:"🏛️",desc:"İstanbul'un fethinden sonra inşa edilmeye başlandı ve uzun süre Osmanlı yönetiminin önemli merkezlerinden biri oldu."},
+ {id:"edirne",title:"Edirne",category:"Mekânlar",year:"14. yüzyıl",icon:"🕌",desc:"Osmanlı'nın Rumeli'deki önemli şehirlerinden biri ve İstanbul'dan önceki başkentlerinden biriydi."}
+];
+
+const events = [
+ {year:1299,title:"Osmanlı Beyliği'nin kuruluş dönemi",desc:"1299 geleneksel kuruluş tarihi olarak yaygın biçimde kullanılır; kuruluş süreci daha geniş bir döneme yayılır."},
+ {year:1326,title:"Bursa'nın fethi",desc:"Bursa, Osmanlı'nın önemli siyasi ve ekonomik merkezlerinden biri oldu."},
+ {year:1361,title:"Edirne'nin alınması",desc:"Edirne, Rumeli'deki Osmanlı ilerleyişinde önemli bir merkez hâline geldi."},
+ {year:1402,title:"Ankara Savaşı",desc:"Yıldırım Bayezid ile Timur arasında gerçekleşti; ardından Fetret Devri yaşandı."},
+ {year:1453,title:"İstanbul'un fethi",desc:"Fatih Sultan Mehmet'in komutasındaki Osmanlı ordusu şehri fethetti."},
+ {year:1514,title:"Çaldıran Savaşı",desc:"Yavuz Sultan Selim döneminde Safevilerle yapılan savaş Osmanlı zaferiyle sonuçlandı."},
+ {year:1520,title:"Kanuni Sultan Süleyman tahta çıktı",desc:"Osmanlı tarihinde uzun ve etkili bir hükümdarlık dönemi başladı."},
+ {year:1526,title:"Mohaç Meydan Muharebesi",desc:"Osmanlı ordusu Macar ordusunu mağlup etti."},
+ {year:1699,title:"Karlofça Antlaşması",desc:"Osmanlı tarihinde Avrupa'daki toprak kayıpları açısından önemli bir dönüm noktası oldu."},
+ {year:1839,title:"Tanzimat Fermanı",desc:"Devlet yönetimi ve vatandaşlık hakları alanında reform süreci ilan edildi."},
+ {year:1922,title:"Saltanatın kaldırılması",desc:"1 Kasım 1922'de saltanat kaldırıldı; Osmanlı hanedanının siyasi yönetimi sona erdi."}
+];
+
+const galleryItems = [
+ {id:"fatih",title:"Fatih Sultan Mehmet",icon:"👑",desc:"İstanbul'un fatihi"},
+ {id:"topkapi",title:"Topkapı Sarayı",icon:"🏛️",desc:"Osmanlı yönetiminin tarihî merkezi"},
+ {id:"istanbul",title:"İstanbul'un Fethi",icon:"🏰",desc:"1453 tarihî dönüm noktası"},
+ {id:"kanuni",title:"Kanuni Sultan Süleyman",icon:"📜",desc:"Osmanlı'nın güçlü hükümdarlarından"},
+ {id:"sogut",title:"Söğüt",icon:"🌳",desc:"Osmanlı'nın kuruluş dönemiyle özdeşleşen yer"},
+ {id:"mohac",title:"Mohaç Meydan Muharebesi",icon:"🛡️",desc:"1526 tarihli savaş"}
+];
+
+const questions = [
+ {q:"İstanbul'u 1453 yılında fetheden padişah kimdir?",a:["Osman Bey","Fatih Sultan Mehmet","Kanuni Sultan Süleyman","Yavuz Sultan Selim"],correct:1},
+ {q:"Bursa hangi yıl fethedildi?",a:["1299","1326","1453","1526"],correct:1},
+ {q:"Çaldıran Savaşı hangi padişah döneminde gerçekleşti?",a:["Yavuz Sultan Selim","Orhan Bey","II. Mahmut","Fatih Sultan Mehmet"],correct:0},
+ {q:"Mohaç Meydan Muharebesi hangi yıl gerçekleşti?",a:["1453","1514","1526","1699"],correct:2},
+ {q:"Osmanlı Beyliği'nin kurucusu kabul edilen kişi kimdir?",a:["Orhan Bey","Osman Bey","I. Murat","Yıldırım Bayezid"],correct:1},
+ {q:"Topkapı Sarayı hangi şehirdedir?",a:["Bursa","Edirne","İstanbul","Söğüt"],correct:2},
+ {q:"Tanzimat Fermanı hangi yılda ilan edildi?",a:["1699","1839","1908","1922"],correct:1},
+ {q:"Saltanat hangi tarihte kaldırıldı?",a:["29 Mayıs 1453","23 Nisan 1920","1 Kasım 1922","29 Ekim 1923"],correct:2}
+];
+
+const $ = id => document.getElementById(id);
+let favorites = [];
+try { favorites = JSON.parse(localStorage.getItem("osmanliFavorites") || "[]"); } catch(e) {}
+let quizOrder = [], quizIndex = 0, score = 0, answered = false;
+
+function isFavorite(id){return favorites.includes(id)}
+function saveFavorites(){
+ try {localStorage.setItem("osmanliFavorites",JSON.stringify(favorites));}
+ catch(e) {}
+ $("favCount").textContent = favorites.length;
+ renderFavorites();
+}
+function toggleFavorite(id){
+ favorites = isFavorite(id) ? favorites.filter(x=>x!==id) : [...favorites,id];
+ saveFavorites();
+ renderSearch();
+ renderGallery();
+}
+function cardHTML(item, gallery=false){
+ const saved = isFavorite(item.id);
+ return `<article class="card">
+ ${gallery ? `<div class="art" aria-hidden="true">${item.icon}</div>` : ""}
+ <div class="eyebrow">${item.category || "Tarih Galerisi"} ${item.year ? " • "+item.year : ""}</div>
+ <h3>${item.title}</h3>
+ <p>${item.desc}</p>
+ <div class="card-actions">
+ <button class="btn secondary" data-fav="${item.id}">${saved?"★ Favorilerden çıkar":"☆ Favorilere ekle"}</button>
+ <button class="btn secondary" data-detail="${item.id}">Detayı gör</button>
+ </div>
+ </article>`;
+}
+function attachCardActions(root){
+ root.querySelectorAll("[data-fav]").forEach(b=>b.addEventListener("click",()=>toggleFavorite(b.dataset.fav)));
+ root.querySelectorAll("[data-detail]").forEach(b=>b.addEventListener("click",()=>{
+ const item=topics.find(t=>t.id===b.dataset.detail);
+ if(item){
+  alert(item.title+"\n"+(item.year||"")+"\n\n"+item.desc);
+ }
+ }));
+}
+function renderSearch(){
+ const q=$("search").value.trim().toLocaleLowerCase("tr");
+ const found=topics.filter(t=>(t.title+" "+t.category+" "+t.year+" "+t.desc).toLocaleLowerCase("tr").includes(q));
+ const root=$("searchResults");
+ root.innerHTML=found.length ? found.map(t=>cardHTML(t)).join("") : '<div class="empty">Bu aramayla eşleşen bir konu bulunamadı.</div>';
+ attachCardActions(root);
+}
+function renderGallery(){
+ const root=$("gallery");
+ root.innerHTML=galleryItems.map(g=>{
+ const item=topics.find(t=>t.id===g.id);
+ return cardHTML({...item,...g,category:"Galeri"},true);
+ }).join("");
+ attachCardActions(root);
+}
+function renderFavorites(){
+ const root=$("favorites");
+ const list=topics.filter(t=>favorites.includes(t.id));
+ root.innerHTML=list.length ? list.map(t=>cardHTML(t)).join("") : '<div class="empty">Henüz favorin yok. Arşivden bir konuyu favorilerine ekleyebilirsin.</div>';
+ attachCardActions(root);
+}
+function renderTimeline(){
+ $("timeline").innerHTML=events.map(e=>`<div class="event"><time>${e.year}</time><h3>${e.title}</h3><p>${e.desc}</p></div>`).join("");
+}
+
+function startQuiz(){
+ quizOrder=questions.map((_,i)=>i).sort(()=>Math.random()-.5);
+ quizIndex=0;score=0;
+ $("startQuiz").classList.add("hidden");
+ showQuestion();
+}
+function showQuestion(){
+ answered=false;
+ const q=questions[quizOrder[quizIndex]];
+ $("quizProgress").textContent=`Soru ${quizIndex+1} / ${quizOrder.length} • Puan: ${score}`;
+ $("question").textContent=q.q;
+ $("feedback").textContent="";
+ $("answers").innerHTML=q.a.map((a,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}) ${a}</button>`).join("");
+ $("nextQuestion").classList.add("hidden");
+ $("answers").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>answerQuestion(Number(b.dataset.answer),b)));
+}
+function answerQuestion(choice,button){
+ if(answered)return;
+ answered=true;
+ const q=questions[quizOrder[quizIndex]];
+ $("answers").querySelectorAll("button").forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.correct)b.classList.add("correct");
+ });
+ if(choice===q.correct){
+  score+=10;$("feedback").textContent="Doğru cevap! +10 puan";
+ }else{
+  button.classList.add("wrong");
+  $("feedback").textContent="Bu kez olmadı. Doğru cevap: "+q.a[q.correct];
+ }
+ $("quizProgress").textContent=`Soru ${quizIndex+1} / ${quizOrder.length} • Puan: ${score}`;
+ $("nextQuestion").classList.remove("hidden");
+ $("nextQuestion").textContent=quizIndex===quizOrder.length-1?"Sonucu gör":"Sonraki soru →";
+}
+function nextQuestion(){
+ quizIndex++;
+ if(quizIndex>=quizOrder.length){
+  $("question").textContent=`Yarışma tamamlandı! ${score} / ${questions.length*10} puan`;
+  $("answers").innerHTML="";
+  $("feedback").textContent=score>=60?"Harika sonuç! Tarih bilgin oldukça iyi.":"Güzel deneme! Arşivi inceleyip yeniden deneyebilirsin.";
+  $("quizProgress").textContent="Yarışma sonucu";
+  $("nextQuestion").classList.add("hidden");
+  $("startQuiz").classList.remove("hidden");
+  $("startQuiz").textContent="Tekrar oyna";
+ }else showQuestion();
+}
+$("startQuiz").addEventListener("click",startQuiz);
+$("nextQuestion").addEventListener("click",nextQuestion);
+$("search").addEventListener("input",renderSearch);
+$("clearSearch").addEventListener("click",()=>{$("search").value="";renderSearch();$("search").focus()});
+
+function setupMap(){
+ if(typeof L==="undefined"){
+  $("map").innerHTML='<p style="padding:20px">Harita yüklenemedi. İnternet bağlantını kontrol edip sayfayı yenile.</p>';
+  return;
+ }
+ const map=L.map("map").setView([39.1,32.7],5);
+ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+  maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+ }).addTo(map);
+ const places=[
+  {name:"Söğüt",coords:[40.02,30.18],desc:"Osmanlı Beyliği'nin kuruluş dönemiyle özdeşleşen yer."},
+  {name:"Bursa",coords:[40.19,29.06],desc:"1326'da fethedilen, Osmanlı'nın erken dönem önemli merkezlerinden."},
+  {name:"Edirne",coords:[41.68,26.56],desc:"Osmanlı'nın Rumeli'deki önemli merkezi ve eski başkentlerinden."},
+  {name:"Topkapı Sarayı",coords:[41.0115,28.9833],desc:"İstanbul'da bulunan tarihî Osmanlı sarayı."},
+  {name:"İstanbul",coords:[41.0082,28.9784],desc:"1453'te Fatih Sultan Mehmet tarafından fethedilen şehir."}
+ ];
+ places.forEach(p=>L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong><br>${p.desc}`));
+}
+renderSearch();
+renderGallery();
+renderTimeline();
+saveFavorites();
+setupMap();
+</script>
 </body>
 </html>
