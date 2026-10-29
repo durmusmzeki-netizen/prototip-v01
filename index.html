@@ -264,14 +264,114 @@ const galleryItems = [
 ];
 
 const questions = [
- {q:"İstanbul'u 1453 yılında fetheden padişah kimdir?",a:["Osman Bey","Fatih Sultan Mehmet","Kanuni Sultan Süleyman","Yavuz Sultan Selim"],correct:1},
- {q:"Bursa hangi yıl fethedildi?",a:["1299","1326","1453","1526"],correct:1},
- {q:"Çaldıran Savaşı hangi padişah döneminde gerçekleşti?",a:["Yavuz Sultan Selim","Orhan Bey","II. Mahmut","Fatih Sultan Mehmet"],correct:0},
- {q:"Mohaç Meydan Muharebesi hangi yıl gerçekleşti?",a:["1453","1514","1526","1699"],correct:2},
- {q:"Osmanlı Beyliği'nin kurucusu kabul edilen kişi kimdir?",a:["Orhan Bey","Osman Bey","I. Murat","Yıldırım Bayezid"],correct:1},
- {q:"Topkapı Sarayı hangi şehirdedir?",a:["Bursa","Edirne","İstanbul","Söğüt"],correct:2},
- {q:"Tanzimat Fermanı hangi yılda ilan edildi?",a:["1699","1839","1908","1922"],correct:1},
- {q:"Saltanat hangi tarihte kaldırıldı?",a:["29 Mayıs 1453","23 Nisan 1920","1 Kasım 1922","29 Ekim 1923"],correct:2}
+ const questions = [
+  ["Kuruluş", "Osmanlı Devleti'nin kurucusu kimdir?", ["Osman Bey", "Orhan Bey", "I. Murad", "Ertuğrul Gazi"], 0],
+  ["Kuruluş", "Osmanlı'nın Bizans'a karşı kazandığı önemli erken dönem savaşı hangisidir?", ["Ankara", "Bafeus (Koyunhisar)", "Niğbolu", "Varna"], 1],
+  ["Kuruluş", "Osmanlılar Rumeli'ye geçişte hangi kaleyi üs olarak kullandı?", ["Çimpe", "Rumeli Hisarı", "Kilitbahir", "Anadolu Hisarı"], 0],
+  ["Kuruluş", "Osmanlı'nın ilk başkenti kabul edilen şehir hangisidir?", ["Edirne", "Bursa", "İstanbul", "İznik"], 1],
+  ["Kuruluş", "Osmanlı Beyliği'nin ortaya çıktığı bölge neresidir?", ["Bilecik-Söğüt çevresi", "Konya", "Amasya", "Manisa"], 0],
+
+  ["Yükselme", "İstanbul'u fetheden Osmanlı padişahı kimdir?", ["II. Murad", "Yıldırım Bayezid", "Fatih Sultan Mehmet", "Yavuz Sultan Selim"], 2],
+  ["Yükselme", "İstanbul hangi yıl fethedildi?", ["1453", "1402", "1517", "1526"], 0],
+  ["Yükselme", "Fatih döneminde hazırlanan kanunname hangi alanla ilişkilidir?", ["Deniz ticareti", "Devlet yönetimi ve teşkilat", "Tarım vergileri yalnızca", "Eğitim zorunluluğu"], 1],
+  ["Yükselme", "Otlukbeli Savaşı hangi devletle yapıldı?", ["Safeviler", "Akkoyunlular", "Memlükler", "Bizans"], 1],
+  ["Yükselme", "Osmanlı donanmasının önemli kaptanlarından Barbaros Hayreddin Paşa hangi alanda tanınır?", ["Denizcilik", "Mimarlık", "Tıp", "Astronomi"], 0],
+
+  ["Yükselme", "Mercidabık Savaşı hangi yıl yapıldı?", ["1514", "1516", "1517", "1526"], 1],
+  ["Yükselme", "Ridaniye Savaşı'nın sonucunda hangi bölge Osmanlı hâkimiyetine girdi?", ["Mısır", "Kırım", "Bosna", "Eflak"], 0],
+  ["Yükselme", "Çaldıran Savaşı hangi hükümdar döneminde gerçekleşti?", ["Fatih Sultan Mehmet", "Yavuz Sultan Selim", "Kanuni Sultan Süleyman", "II. Bayezid"], 1],
+  ["Yükselme", "Mohaç Meydan Muharebesi hangi devletle yapıldı?", ["Avusturya", "Macaristan", "Safeviler", "Memlükler"], 1],
+  ["Yükselme", "Kanuni Sultan Süleyman döneminde Osmanlı'nın batıdaki önemli rakiplerinden biri hangisiydi?", ["Macar Krallığı", "Göktürkler", "Emeviler", "Karahanlılar"], 0],
+
+  ["Kurumlar", "Osmanlı'da padişahın başkanlığında toplanan yüksek yönetim kurulu hangisidir?", ["Divan-ı Hümayun", "Enderun", "Lonca", "Meclis-i Mebusan"], 0],
+  ["Kurumlar", "Devşirme sistemi esas olarak hangi amaçla kullanıldı?", ["Saray ve askerî yönetim için insan yetiştirmek", "Yeni şehirler kurmak", "Deniz ticaretini yasaklamak", "Vergileri kaldırmak"], 0],
+  ["Kurumlar", "Tımar sisteminin temel amaçlarından biri neydi?", ["Atlı asker yetiştirmek ve taşrada düzeni sağlamak", "Matbaa kurmak", "Donanmayı kaldırmak", "Yabancı parayı yasaklamak"], 0],
+  ["Kurumlar", "Osmanlı'da kadıların başlıca görevi neydi?", ["Adalet ve yargı işleri", "Donanma komutanlığı", "Hazine basımı", "Saray mutfağı"], 0],
+  ["Kurumlar", "Osmanlı'da vakıflar çoğunlukla hangi amaçla kurulurdu?", ["Toplumsal ve dinî hizmetleri desteklemek", "Savaş ilan etmek", "Taht değişimini belirlemek", "Sınırları çizmek"], 0],
+
+  ["Bilim ve Kültür", "Mimar Sinan'ın eserlerinden biri hangisidir?", ["Süleymaniye Camii", "Ayasofya'nın ilk yapımı", "Anıtkabir", "Selimiye Kışlası"], 0],
+  ["Bilim ve Kültür", "Piri Reis hangi alanla tanınır?", ["Haritacılık ve denizcilik", "Hukuk", "Şiir", "Tıp"], 0],
+  ["Bilim ve Kültür", "Evliya Çelebi hangi eseriyle tanınır?", ["Seyahatname", "Divan", "Kutadgu Bilig", "Siyasetname"], 0],
+  ["Bilim ve Kültür", "Osmanlı klasik mimarisinin en önemli isimlerinden biri kimdir?", ["Mimar Sinan", "Ali Kuşçu", "Katip Çelebi", "Akşemseddin"], 0],
+  ["Bilim ve Kültür", "Ali Kuşçu hangi alanlarda çalışmalarıyla tanınır?", ["Matematik ve astronomi", "Denizcilik ve askerlik", "Resim ve heykel", "Müzik ve tiyatro"], 0],
+
+  ["Duraklama", "Osmanlı tarihinde 1606 Zitvatorok Antlaşması hangi devletle imzalandı?", ["Avusturya", "İran", "Rusya", "Fransa"], 0],
+  ["Duraklama", "Kasr-ı Şirin Antlaşması hangi iki devlet arasındaydı?", ["Osmanlı ve Safeviler", "Osmanlı ve Fransa", "Osmanlı ve İngiltere", "Osmanlı ve Venedik"], 0],
+  ["Duraklama", "Köprülü Mehmed Paşa hangi göreviyle tanınır?", ["Sadrazamlık", "Kaptan-ı deryalık", "Şeyhülislamlık", "Defterdarlık"], 0],
+  ["Duraklama", "II. Viyana Kuşatması hangi yıl gerçekleşti?", ["1683", "1571", "1699", "1718"], 0],
+  ["Duraklama", "II. Viyana Kuşatması sonrasında Osmanlı'nın karşısında oluşan ittifak hangi adla bilinir?", ["Kutsal İttifak", "Haçlı Birliği'nin ilk kuruluşu", "Doğu Bloku", "Kutsal Roma Senatosu"], 0],
+
+  ["Gerileme", "Karlofça Antlaşması hangi yıl imzalandı?", ["1699", "1718", "1774", "1839"], 0],
+  ["Gerileme", "Lale Devri hangi padişah dönemindedir?", ["III. Ahmed", "II. Mahmud", "I. Abdülhamid", "V. Murad"], 0],
+  ["Gerileme", "Lale Devri'nde matbaanın kurulmasıyla tanınan kişi kimdir?", ["İbrahim Müteferrika", "Piri Reis", "Mimar Sinan", "Barbaros Hayreddin Paşa"], 0],
+  ["Gerileme", "Pasarofça Antlaşması hangi yıl imzalandı?", ["1718", "1699", "1774", "1829"], 0],
+  ["Gerileme", "Küçük Kaynarca Antlaşması hangi yıl imzalandı?", ["1774", "1768", "1792", "1839"], 0],
+
+  ["Islahatlar", "III. Selim'in yenilik hareketleri hangi adla bilinir?", ["Nizam-ı Cedid", "Tanzimat", "Islahat Fermanı", "Sened-i İttifak"], 0],
+  ["Islahatlar", "Sened-i İttifak hangi yıl imzalandı?", ["1808", "1839", "1856", "1876"], 0],
+  ["Islahatlar", "Tanzimat Fermanı hangi yıl ilan edildi?", ["1839", "1808", "1856", "1876"], 0],
+  ["Islahatlar", "Islahat Fermanı hangi yıl ilan edildi?", ["1856", "1839", "1876", "1908"], 0],
+  ["Islahatlar", "Yeniçeri Ocağı hangi padişah döneminde kaldırıldı?", ["II. Mahmud", "III. Selim", "Abdülmecid", "II. Abdülhamid"], 0],
+
+  ["Son Dönem", "Birinci Meşrutiyet hangi yıl ilan edildi?", ["1876", "1839", "1908", "1920"], 0],
+  ["Son Dönem", "İkinci Meşrutiyet hangi yıl ilan edildi?", ["1908", "1876", "1914", "1923"], 0],
+  ["Son Dönem", "Osmanlı Devleti hangi savaşta Almanya'nın yanında yer aldı?", ["Birinci Dünya Savaşı", "Yedi Yıl Savaşı", "Kırım Savaşı", "Otuz Yıl Savaşı"], 0],
+  ["Son Dönem", "Çanakkale Cephesi hangi savaşın parçasıdır?", ["Birinci Dünya Savaşı", "Balkan Savaşları", "Kırım Savaşı", "Kurtuluş Savaşı"], 0],
+  ["Son Dönem", "Mondros Ateşkes Antlaşması hangi yıl imzalandı?", ["1918", "1914", "1920", "1923"], 0],
+
+  ["Önemli Kişiler", "Osmanlı tarihçisi ve seyyahı Evliya Çelebi hangi eserle tanınır?", ["Seyahatname", "Tezkiretü'ş-Şuara", "Divan-ı Hikmet", "Nutuk"], 0],
+  ["Önemli Kişiler", "Akşemseddin, Fatih Sultan Mehmet ile hangi yönüyle ilişkilendirilir?", ["Manevi hocası olması", "Donanma komutanı olması", "Sadrazam olması", "Haritacı olması"], 0],
+  ["Önemli Kişiler", "Osmanlı denizcisi Turgut Reis hangi alanda tanınır?", ["Deniz savaşları", "Mimarlık", "Şairlik", "Vergi düzenlemesi"], 0],
+  ["Önemli Kişiler", "Kâtip Çelebi hangi alanlarda eserler vermiştir?", ["Coğrafya ve tarih", "Yalnızca mimarlık", "Deniz komutanlığı", "Heykel sanatı"], 0],
+  ["Önemli Kişiler", "Koçi Bey risaleleri en çok hangi konuyla ilişkilidir?", ["Devlet düzeni ve ıslahat önerileri", "Deniz haritaları", "Şiir kuramı", "Tıp reçeteleri"], 0],
+
+  ["Genel Tarih", "Osmanlı Devleti'nin ilk anayasası hangisidir?", ["Kanun-ı Esasi", "Tanzimat Fermanı", "Sened-i İttifak", "Islahat Fermanı"], 0],
+  ["Genel Tarih", "Osmanlı'nın başkentleri sırasıyla hangi seçenekte doğru verilmiştir?", ["Bursa-Edirne-İstanbul", "İstanbul-Bursa-Edirne", "Edirne-İstanbul-Bursa", "Söğüt-İstanbul-Bursa"], 0],
+  ["Genel Tarih", "Osmanlı'da deniz kuvvetlerinin başındaki önemli görev hangisidir?", ["Kaptan-ı derya", "Kazasker", "Defterdar", "Nişancı"], 0],
+  ["Genel Tarih", "Osmanlı maliyesinde gelir-gider kayıtlarıyla ilgilenen görevli hangisidir?", ["Defterdar", "Kadı", "Subaşı", "Şeyhülislam"], 0],
+  ["Genel Tarih", "Osmanlı'da padişah tuğrasını çeken ve resmî yazışmalarda görev alan görevli kimdir?", ["Nişancı", "Kaptan-ı derya", "Yeniçeri ağası", "Kazasker"], 0],
+
+  ["Genel Tarih", "Osmanlı'da askerî ve idari eğitim verilen saray kurumu hangisidir?", ["Enderun", "Lonca", "Bedesten", "Darüşşifa"], 0],
+  ["Genel Tarih", "Osmanlı şehirlerinde esnafın mesleki düzenini sağlayan teşkilat hangisidir?", ["Lonca", "Divan", "Tımar", "Enderun"], 0],
+  ["Genel Tarih", "Osmanlı'da medreselerin temel işlevi neydi?", ["Eğitim ve öğretim", "Donanma üretimi", "Vergi toplama", "Sınır savunması"], 0],
+  ["Genel Tarih", "Osmanlı'da hastane işlevi gören tarihî kurumlar hangi adla bilinir?", ["Darüşşifa", "Bedesten", "Kervansaray", "Tabhane"], 0],
+  ["Genel Tarih", "Kervansarayların temel amacı neydi?", ["Yolculara ve tüccarlara konaklama sağlamak", "Saray eğitimi vermek", "Savaş ilan etmek", "Para basmak"], 0],
+
+  ["Genel Tarih", "Osmanlı'da tımar sistemi en çok hangi bölgede uygulanırdı?", ["Taşrada", "Yalnızca saray içinde", "Yalnızca donanmada", "Sadece başkentte"], 0],
+  ["Genel Tarih", "Osmanlı'da şer'i hukuk yanında hangi hukuk türü de uygulanmıştır?", ["Örfî hukuk", "Roma hukuku yalnızca", "Kanon hukuku", "Feodal hukuk"], 0],
+  ["Genel Tarih", "Osmanlı'da kadıların kararlarını denetleme ve hukuk düzeninde önemli rol oynayan makam hangisidir?", ["Kazaskerlik", "Kaptan-ı deryalık", "Nişancılık", "Yeniçeri ağalığı"], 0],
+  ["Genel Tarih", "Osmanlı'da devletin en yüksek dinî-hukukî makamlarından biri hangisidir?", ["Şeyhülislamlık", "Kaptan-ı deryalık", "Defterdarlık", "Subaşılık"], 0],
+  ["Genel Tarih", "Osmanlı'da yeniçerilerin bağlı olduğu askerî yapı hangisidir?", ["Kapıkulu ocakları", "Tımarlı sipahiler", "Akıncılar", "Azaplar"], 0],
+
+  ["Genel Tarih", "Tımarlı sipahilerin gelir kaynağı esas olarak neydi?", ["Kendilerine tahsis edilen dirlik gelirleri", "Deniz ticareti", "Saray maaşları yalnızca", "Yabancı yardımlar"], 0],
+  ["Genel Tarih", "Osmanlı akıncılarının temel görevlerinden biri neydi?", ["Sınır ötesi keşif ve akınlar", "Sarayda eğitim", "Vergi defteri tutmak", "Mahkeme yönetmek"], 0],
+  ["Genel Tarih", "Osmanlı'da ulak sistemi en çok hangi işle ilişkilidir?", ["Haber ve resmî evrak taşımak", "Top dökmek", "Tarım yapmak", "Para basmak"], 0],
+  ["Genel Tarih", "Osmanlı'da bedestenler çoğunlukla hangi işlevi görürdü?", ["Ticaret ve değerli malların alım satımı", "Askerî eğitim", "Mahkeme", "Saray mutfağı"], 0],
+  ["Genel Tarih", "Osmanlı mimarisinde külliye neyi ifade eder?", ["Bir yapı topluluğunu", "Bir askerî rütbeyi", "Bir vergi türünü", "Bir antlaşmayı"], 0],
+
+  ["Genel Tarih", "Osmanlı'nın Avrupa'da genişlemesinde önemli rol oynayan savaşlardan biri hangisidir?", ["Niğbolu Savaşı", "Sakarya Meydan Muharebesi", "Malazgirt Savaşı", "Dumlupınar Savaşı"], 0],
+  ["Genel Tarih", "Ankara Savaşı hangi hükümdarla yapılmıştır?", ["Timur", "Şah İsmail", "Karlofça temsilcileri", "Napolyon"], 0],
+  ["Genel Tarih", "Ankara Savaşı'nın ardından Osmanlı'da hangi dönem yaşandı?", ["Fetret Devri", "Lale Devri", "Tanzimat", "Meşrutiyet"], 0],
+  ["Genel Tarih", "Osmanlı'da Fetret Devri'ni sona erdirerek birliği yeniden sağlayan padişah kimdir?", ["Çelebi Mehmet", "I. Murad", "Fatih Sultan Mehmet", "Yavuz Sultan Selim"], 0],
+  ["Genel Tarih", "Varna Savaşı hangi yıl gerçekleşti?", ["1444", "1389", "1453", "1514"], 0],
+
+  ["Genel Tarih", "Kosova Savaşı'nın 1389'daki ilkinde Osmanlı hükümdarı kimdi?", ["I. Murad", "Orhan Bey", "II. Murad", "Yıldırım Bayezid"], 0],
+  ["Genel Tarih", "Preveze Deniz Savaşı hangi yıl gerçekleşti?", ["1538", "1453", "1571", "1683"], 0],
+  ["Genel Tarih", "İnebahtı Deniz Savaşı hangi yıl gerçekleşti?", ["1571", "1538", "1517", "1699"], 0],
+  ["Genel Tarih", "Zitvatorok Antlaşması Osmanlı açısından hangi gelişmeyle ilişkilendirilir?", ["Avusturya hükümdarıyla protokol denkliğinin kabulü", "İstanbul'un fethi", "Mısır'ın alınması", "Yeniçeriliğin kaldırılması"], 0],
+  ["Genel Tarih", "Kırım Savaşı hangi yıllar arasında gerçekleşti?", ["1853-1856", "1806-1812", "1877-1878", "1914-1918"], 0],
+
+  ["Genel Tarih", "93 Harbi olarak bilinen Osmanlı-Rus Savaşı hangi yıllarda gerçekleşti?", ["1877-1878", "1853-1856", "1912-1913", "1806-1812"], 0],
+  ["Genel Tarih", "Balkan Savaşları hangi dönemde gerçekleşti?", ["1912-1913", "1877-1878", "1853-1856", "1920-1922"], 0],
+  ["Genel Tarih", "Trablusgarp Savaşı'nda Osmanlı hangi devletle savaştı?", ["İtalya", "Rusya", "İngiltere", "Avusturya"], 0],
+  ["Genel Tarih", "Trablusgarp Savaşı hangi yıllarda gerçekleşti?", ["1911-1912", "1912-1913", "1877-1878", "1908-1909"], 0],
+  ["Genel Tarih", "Osmanlı Devleti'nin resmen sona ermesi hangi olayla ilişkilidir?", ["Saltanatın kaldırılması", "İstanbul'un fethi", "Tanzimat Fermanı", "Lale Devri"], 0],
+
+  ["Genel Tarih", "Saltanat hangi yıl kaldırıldı?", ["1922", "1920", "1923", "1919"], 0],
+  ["Genel Tarih", "Türkiye Cumhuriyeti hangi yıl ilan edildi?", ["1923", "1920", "1922", "1938"], 0],
+  ["Genel Tarih", "Osmanlı'nın son padişahı kimdir?", ["VI. Mehmed Vahdeddin", "II. Abdülhamid", "V. Mehmed Reşad", "Abdülmecid"], 0],
+  ["Genel Tarih", "Osmanlı'nın son halifesi kimdir?", ["Abdülmecid Efendi", "VI. Mehmed Vahdeddin", "II. Abdülhamid", "V. Murad"], 0],
+  ["Genel Tarih", "Osmanlı Devleti'nin kuruluşundan son dönemine kadar yönetim biçimi esas olarak neydi?", ["Monarşi", "Cumhuriyet", "Federasyon", "Parlamenter cumhuriyet"], 0]
 ];
 
 const $ = id => document.getElementById(id);
