@@ -2,51 +2,79 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOTİP V.01</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #101820, #263746);
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .container {
-            padding: 30px;
-        }
-
-        h1 {
-            font-size: 36px;
-            letter-spacing: 2px;
-        }
-
-        p {
-            color: #bdc8d2;
-            font-size: 17px;
-        }
-
-        .version {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            border: 1px solid #63c5da;
-            border-radius: 8px;
-            color: #63c5da;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osmanlı Tarihi</title>
+<style>
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:#101010;color:#f4e5bd;font-family:Georgia,serif}
+header{text-align:center;padding:25px 10px;background:#080808;border-bottom:2px solid #c9a44c}
+header h1{color:#e7c66d;margin:0}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;padding:15px;background:#211b10}
+nav a{color:#f1d58b;text-decoration:none;font-weight:bold}
+.hero{text-align:center;padding:75px 15px;background:linear-gradient(135deg,#38270d,#090909,#251b0b)}
+.hero h2{font-size:40px;color:#f0cf78}
+.hero p{line-height:1.8;font-size:18px}
+section{max-width:900px;margin:auto;padding:30px 18px}
+h2.section-title{color:#e7c66d;border-bottom:1px solid #8d7136;padding-bottom:12px}
+.card{background:#1c1c1c;border:1px solid #65512b;border-radius:10px;padding:18px;margin:15px 0;line-height:1.8}
+.card h3{color:#e7c66d;margin-top:0}
+.timeline{border-left:3px solid #c9a44c;padding-left:20px}
+footer{text-align:center;padding:25px;background:#080808;color:#b9a879;border-top:1px solid #9d7b30}
+@media(max-width:600px){.hero h2{font-size:30px}nav{gap:12px}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>PROTOTİP V.01</h1>
-        <p>Yeni bir projenin başlangıcı.</p>
-        <div class="version">Sürüm 0.1</div>
-    </div>
+<header>
+<h1>☾ OSMANLI TARİHİ ☽</h1>
+<p>Bir Cihan Devletinin Hikâyesi</p>
+</header>
+<nav>
+<a href="#anasayfa">Ana Sayfa</a>
+<a href="#kurulus">Kuruluş</a>
+<a href="#padisahlar">Padişahlar</a>
+<a href="#fetihler">Fetihler</a>
+<a href="#zaman">Zaman Çizelgesi</a>
+</nav>
+<div class="hero" id="anasayfa">
+<h2>Bir Cihan<br>Devletinin Hikâyesi</h2>
+<p>Söğüt'te başlayan bir yolculuk...<br>Üç kıtaya uzanan büyük bir tarih.</p>
+</div>
+<section id="kurulus">
+<h2 class="section-title">Osmanlı Devleti'nin Kuruluşu</h2>
+<div class="card">
+<h3>Osman Bey</h3>
+Osmanlı Beyliği'nin kurucusu kabul edilir. 13. yüzyılın sonlarında beyliğin güçlenmesinde önemli rol oynadı.
+</div>
+<div class="card">
+<h3>Orhan Bey</h3>
+1326 yılında Bursa fethedildi. Devlet teşkilatı gelişti ve Rumeli'ye geçiş için önemli adımlar atıldı.
+</div>
+</section>
+<section id="padisahlar">
+<h2 class="section-title">Padişahlar ve Hayatları</h2>
+<div class="card"><h3>Osman Bey</h3>Osmanlı Beyliği'nin kurucusudur.</div>
+<div class="card"><h3>Orhan Bey</h3>Bursa'nın fethi ve devlet teşkilatının gelişmesiyle tanınır.</div>
+<div class="card"><h3>Fatih Sultan Mehmet</h3>1453 yılında İstanbul'u fethetti. Bu fetih, dünya tarihinde önemli bir dönüm noktası oldu.</div>
+<div class="card"><h3>Kanuni Sultan Süleyman</h3>Osmanlı Devleti'nin siyasi, askerî ve kültürel açıdan güçlü olduğu dönemde hüküm sürdü.</div>
+</section>
+<section id="fetihler">
+<h2 class="section-title">Savaşlar ve Fetihler</h2>
+<div class="card"><h3>Bursa'nın Fethi — 1326</h3>Orhan Bey döneminde gerçekleşti.</div>
+<div class="card"><h3>İstanbul'un Fethi — 1453</h3>Fatih Sultan Mehmet'in komutasında gerçekleşti.</div>
+<div class="card"><h3>Çaldıran Savaşı — 1514</h3>Yavuz Sultan Selim döneminde Osmanlı zaferiyle sonuçlandı.</div>
+<div class="card"><h3>Mohaç Meydan Muharebesi — 1526</h3>Kanuni Sultan Süleyman döneminde Osmanlı zaferi kazanıldı.</div>
+</section>
+<section id="zaman">
+<h2 class="section-title">Zaman Çizelgesi</h2>
+<div class="timeline">
+<p><strong>1299 civarı:</strong> Osmanlı Beyliği'nin kuruluş dönemi.</p>
+<p><strong>1326:</strong> Bursa'nın fethi.</p>
+<p><strong>1453:</strong> İstanbul'un fethi.</p>
+<p><strong>1514:</strong> Çaldıran Savaşı.</p>
+<p><strong>1526:</strong> Mohaç Meydan Muharebesi.</p>
+</div>
+</section>
+<footer>Osmanlı Tarihi | Eğitim amaçlı hazırlanmıştır.</footer>
 </body>
 </html>
