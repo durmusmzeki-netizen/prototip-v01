@@ -302,5 +302,5 @@ footer {
 
 </body>
 </html>
-# prototip-v01
-Osmanlı Tarihi - Prototip V.01
+
+    
